@@ -36,6 +36,7 @@ func main() {
 	flag.Parse()
 	if configFile == "" {
 		logger.Error("No configuration file provided.")
+		// Unfortunately, deferred functions are not executed when os.Exit(int) is called. T_T
 		logger.Close()
 		os.Exit(1)
 	}

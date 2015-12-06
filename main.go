@@ -33,7 +33,6 @@ func init() {
 }
 
 func main() {
-	defer logger.Close()
 	flag.Parse()
 	if configFile == "" {
 		logger.Error("No configuration file provided.")
@@ -52,6 +51,7 @@ func main() {
 
 	helloHandler := HelloHandler{Saying: config.Saying}
 	kaiju.Handle("/hello", &helloHandler, "GET")
+	defer logger.Close()
 	if err = kaiju.Start(config.Config); err != nil {
 		panic(logger.Error(err))
 	}
